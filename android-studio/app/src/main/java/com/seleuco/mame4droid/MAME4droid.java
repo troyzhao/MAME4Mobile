@@ -44,6 +44,7 @@
 
 package com.seleuco.mame4droid;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
@@ -51,9 +52,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -61,6 +65,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.seleuco.mame4droid.helpers.DialogHelper;
 import com.seleuco.mame4droid.helpers.MainHelper;
@@ -200,12 +205,34 @@ public class MAME4droid extends Activity {
         
         //mainHelper.checkNewViewIntent(this.getIntent());
                
-        if(!Emulator.isEmulating())
-        {
+		checkPermission();
+    }
+
+    private void checkPermission() {
+		// if SDK level > 23 then check permission
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+			// 检查该权限是否已经获取
+			int i = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+			// 权限是否已经 授权 GRANTED---授权  DINIED---拒绝
+			if (i != PackageManager.PERMISSION_GRANTED) {
+				// 如果没有授予该权限，就去提示用户请求
+				ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+			}
+			else {
+				startEngine();
+			}
+		}
+	}
+
+    private void startEngine() {
+		if(!Emulator.isEmulating())
+		{
 			if(prefsHelper.getROMsDIR()==null)
-			{	            
+			{
 				if(DialogHelper.savedDialog==DialogHelper.DIALOG_NONE)
-				   showDialog(DialogHelper.DIALOG_ROMs_DIR);                      
+					showDialog(DialogHelper.DIALOG_ROMs_DIR);
 			}
 			else
 			{
@@ -216,13 +243,40 @@ public class MAME4droid extends Activity {
 				}
 				else
 				{
-				    runMAME4droid();
+					runMAME4droid();
 				}
 			}
-        }
-    }
-    
-    public void inflateViews(){
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		switch (requestCode) {
+			case 1: {
+				// If request is cancelled, the result arrays are empty.
+				for (int i = 0; i < permissions.length; i++) {
+					String p = permissions[i];
+
+					if (p.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+						Log.d("mame4m", "WRITE_EXTERNAL_STORAGE : " + grantResults[i]);
+						if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+							startEngine();
+						}
+						else if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this, p)) {
+							// 用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
+							Toast.makeText(this, "请允许存储权限", Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
+
+				break;
+
+			}
+		}
+    	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+
+	public void inflateViews(){
     	inputHandler.unsetInputListeners();
     	
         Emulator.setPortraitFull(getPrefsHelper().isPortraitFullscreen());
