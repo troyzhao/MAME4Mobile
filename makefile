@@ -28,9 +28,9 @@ ANDROID = 1
 
 #AARMV6=1
 
-AARMV7=1
+#AARMV7=1
 
-#AARMV8=1
+AARMV8=1
 
 ########## iOS
 
@@ -61,6 +61,8 @@ FORCE_DRC_C_BACKEND = 1
 
 ifdef ANDROID
 
+	NDK_BUNDLE=/Users/apple/developer/AndroidSDK/ndk/17.2.4988734
+
 ifdef AMIPS
 MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8-mips/bin/mipsel-linux-android-
 BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8-mips/sysroot
@@ -77,15 +79,23 @@ BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8/sysroot
 endif
 
 ifdef AARMV7
-MYPREFIX=/home/david/Projects/android/my-android-toolchain-r10c-18/bin/arm-linux-androideabi-
-#MYPREFIX=/home/david/Projects/android/my-android-toolchain-r9-18/bin/
-BASE_DEV=/home/david/Projects/android/my-android-toolchain-r10c-18/sysroot
+# 	NDK_BUNDLE=/Users/apple/developer/AndroidSDK/android-ndk-r10e
+	
+MYPREFIX=$(NDK_BUNDLE)/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
+# MYPREFIX=
+# BASE_DEV=/Users/apple/developer/AndroidSDK/ndk-bundle/sysroot
+BASE_DEV=$(NDK_BUNDLE)/platforms/android-21/arch-arm
+SYSROOT=$(NDK_BUNDLE)/sysroot
+#SYSROOT=$(BASE_DEV)
+CXX_INCLUDE_BASE=$(NDK_BUNDLE)/sources/cxx-stl/gnu-libstdc++/4.9
 endif
 
 ifdef AARMV8
 PTR64 = 1
-MYPREFIX=/home/david/Projects/android/my-android-toolchain-r10c-21-arm64/bin/aarch64-linux-android-
-BASE_DEV=/home/david/Projects/android/my-android-toolchain-r10c-21-arm64/sysroot
+MYPREFIX=$(NDK_BUNDLE)/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64/bin/aarch64-linux-android-
+BASE_DEV=$(NDK_BUNDLE)/platforms/android-21/arch-arm64
+SYSROOT=$(NDK_BUNDLE)/sysroot
+CXX_INCLUDE_BASE=$(NDK_BUNDLE)/sources/cxx-stl/gnu-libstdc++/4.9
 endif
 
 #MYPREFIX=/home/david/Projects/android/my-android-toolchain-14-crystax/bin/arm-linux-androideabi-
@@ -406,7 +416,7 @@ else
 CC = @$(MYPREFIX)gcc
 endif
 LD = @$(MYPREFIX)g++
-
+CC = @$(MYPREFIX)g++
 #AR = @$(MYPREFIX)clang
 #CC = @$(MYPREFIX)clang
 #LD = @$(MYPREFIX)clang++
@@ -746,11 +756,27 @@ SOFTFLOAT = $(OBJ)/libsoftfloat.a
 HQX = $(OBJ)/libhqx.a
 
 ifdef ANDROID
-CCOMFLAGS += --sysroot $(BASE_DEV)
+	
+CCOMFLAGS += --sysroot $(SYSROOT)
+CCOMFLAGS += -I$(SYSROOT)/usr/include
+CCOMFLAGS += -I$(CXX_INCLUDE_BASE)/include
+
 CCOMFLAGS += -DANDROID
 CCOMFLAGS += -fpic
 
+# LDFLAGS +=  -lstdc++
+LDFLAGS +=  -lgnustl_shared
+LDFLAGS +=  -L$(BASE_DEV)/usr/lib
+
+SETTING = $(shell ln -sf $(BASE_DEV)/usr/lib/crtbegin_so.o crtbegin_so.o)
+SETTING += $(shell ln -sf $(BASE_DEV)/usr/lib/crtend_so.o crtend_so.o)
+
 ifdef AARMV7
+
+CCOMFLAGS += -I$(SYSROOT)/usr/include/arm-linux-androideabi
+CCOMFLAGS += -I$(CXX_INCLUDE_BASE)/libs/armeabi-v7a/include
+LDFLAGS +=  -L$(SYSROOT)/usr/lib/arm-linux-androideabi
+LDFLAGS +=  -L$(CXX_INCLUDE_BASE)/libs/armeabi-v7a
 #CCOMFLAGS += -fno-strict-aliasing
 ##CCOMFLAGS += -mno-unaligned-access
 CCOMFLAGS += -mthumb 
@@ -767,7 +793,8 @@ CCOMFLAGS += -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -DARMV7
 CCOMFLAGS += -Wno-unused-but-set-variable -Wno-narrowing
 LDFLAGS += -march=armv7-a -Wl,--fix-cortex-a8
 CCOMFLAGS += -ffast-math
-endif
+
+endif #AARMV7
 
 ifdef AARMV6
 CCOMFLAGS += -mthumb
@@ -775,6 +802,12 @@ LDFLAGS += -Wl,--fix-cortex-a8
 endif
 
 ifdef AARMV8
+
+CCOMFLAGS += -I$(SYSROOT)/usr/include/aarch64-linux-android
+CCOMFLAGS += -I$(CXX_INCLUDE_BASE)/libs/arm64-v8a/include
+LDFLAGS +=  -L$(SYSROOT)/usr/lib/aarch64-linux-android
+LDFLAGS +=  -L$(CXX_INCLUDE_BASE)/libs/arm64-v8a
+
 CCOMFLAGS += -fPIC -fsigned-char -finline  
 
 CCOMFLAGS += -fno-common -fno-builtin 
@@ -786,7 +819,7 @@ CCOMFLAGS += -Wno-unused-but-set-variable -Wno-narrowing
 CCOMFLAGS += -march=armv8-a 
 CCOMFLAGS += -mtune=cortex-a53
 LDFLAGS += -march=armv8-a 
-endif
+endif #AARMV8
 
 #CLANG
 #CCOMFLAGS += -Wno-constant-logical-operand
@@ -821,9 +854,9 @@ LDFLAGS += -lc -lm
 #CCOMFLAGS += -mstructure-size-boundary=32 -mthumb-interwork
 
 #CCOMFLAGS += -fexceptions -frtti
-#LDFLAGS +=  -lstdc++
+
 	
-endif
+endif #ANDROID
 
 ifdef iOS
 #CFLAGS += -isysroot $(BASE_DEV)
@@ -874,7 +907,7 @@ CCOMFLAGS += -miphoneos-version-min=5.0
 #LDFLAGS +=   -ios_version_min 5.0
 #CCOMFLAGS += -x objective-c 
 
-else
+else  #iOSSIMULATOR
 
 CCOMFLAGS += -arch i386 
 #CCOMFLAGS +=  -mios-simulator-version-min=6.0 
@@ -883,9 +916,9 @@ CCOMFLAGS += -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000
 
 LDFLAGS += -arch i386
 
-endif
+endif #iOSSIMULATOR
 
-endif 
+endif #iOSOSX
 
 LDFLAGS += -framework Foundation -framework CoreFoundation -framework UIKit -framework QuartzCore -framework CoreGraphics -framework AudioToolbox -framework GameKit -framework CoreBluetooth
 LDFLAGS += -F$(BASE_DEV)/System/Library/Frameworks
@@ -902,7 +935,7 @@ CCOMFLAGS  += -ffast-math -fsingle-precision-constant
 
 
 #LDFLAGS +=  -static
-endif
+endif #iOS
 
 
 #-------------------------------------------------
@@ -1045,6 +1078,7 @@ $(EMULATOR): $(VERSIONOBJ) $(DRVLIBS) $(OSDOBJS) $(CPUOBJS) $(LIBEMUOBJS) $(DASM
 	$(AR) -v $(ARFLAGS) $@ $^
 else
 $(EMULATOR): $(VERSIONOBJ) $(DRVLIBS) $(OSDOBJS) $(CPUOBJS) $(LIBEMUOBJS) $(DASMOBJS) $(SOUNDOBJS) $(UTILOBJS) $(EXPATOBJS) $(SOFTFLOATOBJS) $(HQXOBJS) $(OSDCOREOBJS) $(RESFILE)
+	@echo Setting $(SETTING)
 	@echo Linking $@...
 	$(LD) $(LDFLAGS) $(LDFLAGSEMULATOR) $^ $(LIBS) -o $@
 endif 
