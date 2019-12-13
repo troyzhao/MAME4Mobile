@@ -11,6 +11,7 @@
 
 #include "opensl_snd.h"
 
+#include <string.h>
 #include <pthread.h>
 static pthread_mutex_t sound_mutex     = PTHREAD_MUTEX_INITIALIZER;
 
