@@ -629,7 +629,7 @@ public class MainHelper {
 				
 				//System.out.println("--->>> "+w+" "+h+ " "+w/h+ " "+ (float)(16.0/9.0));
 				
-			   	if(w/h != (float)(16.0/9.0) /*&& false*/)
+			   	if(w/h < (float)(16.0/9.0) /*&& false*/)
 			   	{					   
 				   inputHandler.readControllerValues(R.raw.controller_landscape);
 			   	}
