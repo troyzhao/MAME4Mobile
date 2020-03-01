@@ -201,7 +201,7 @@ unsigned long myosd_joystick_read(int n)
 {
     unsigned long res=0;
 
-    if(n==0 || myosd_pxasp1 && (myosd_num_of_joys==0 || myosd_num_of_joys==1))
+    if(n==0 || (myosd_pxasp1 && (myosd_num_of_joys==0 || myosd_num_of_joys==1)))
     {
        res = myosd_pad_status;
         
@@ -229,8 +229,7 @@ unsigned long myosd_joystick_read(int n)
 float myosd_joystick_read_analog(int n, char axis)
 {
 	float res = 0.0;
-
-    if(n==0 || myosd_pxasp1 && (myosd_num_of_joys==0 || myosd_num_of_joys==1))
+    if(n==0 || (myosd_pxasp1 && (myosd_num_of_joys==0 || myosd_num_of_joys==1)))
     {
 #ifdef BTJOY
         if(myosd_pxasp1 && myosd_num_of_joys==1)
