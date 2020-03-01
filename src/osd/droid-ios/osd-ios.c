@@ -26,6 +26,20 @@
 
 #define AUDIO_BUFFERS 3
 
+char *myosd_category = NULL;
+int  myosd_res_width = 320;
+int  myosd_res_height = 240;
+int myosd_rgb=0;
+int myosd_refresh = -1;
+float mouse_x[4];
+float mouse_y[4];
+int myosd_mouse = 0;
+int  myosd_light_gun = 0;
+char myosd_rompath[MAX_ROM_PATH] = {'\0'};
+char myosd_game[MAX_GAME_NAME] = {'\0'};
+char myosd_bios[16] = {'\0'};
+char myosd_version[16] = {'\0'};
+
 int  myosd_fps = 1;
 int  myosd_showinfo = 0;
 int  myosd_sleep = 1;
