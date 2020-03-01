@@ -3,10 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18117AA9240BF69A00B771F4 /* Launch-Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18117AA8240BF69A00B771F4 /* Launch-Screen.storyboard */; };
+		18117AAA240BF6ED00B771F4 /* libmamearm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185072A2240A966700582901 /* libmamearm64.a */; };
+		18117AAB240BF87000B771F4 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F1C5F1735199400D3F527 /* CoreBluetooth.framework */; };
+		183BBA912409506300BDBEFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183BBA902409506300BDBEFB /* LaunchScreen.storyboard */; };
+		183BBA932409507A00BDBEFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183BBA922409507A00BDBEFB /* Images.xcassets */; };
+		185072A1240A807D00582901 /* libmamearmv7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185072A0240A807D00582901 /* libmamearmv7.a */; };
+		185072A3240A966700582901 /* libmamearm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185072A2240A966700582901 /* libmamearm64.a */; };
 		CE30090116FA47BD000EDCF1 /* cheat.zip in Resources */ = {isa = PBXBuildFile; fileRef = CE30090016FA47BD000EDCF1 /* cheat.zip */; };
 		CE30090216FA47BD000EDCF1 /* cheat.zip in Resources */ = {isa = PBXBuildFile; fileRef = CE30090016FA47BD000EDCF1 /* cheat.zip */; };
 		CE30090416FA47CB000EDCF1 /* Category.ini in Resources */ = {isa = PBXBuildFile; fileRef = CE30090316FA47CB000EDCF1 /* Category.ini */; };
@@ -19,15 +26,12 @@
 		CE6D6E1716D8CADF00F265B7 /* LayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D6E1316D8CADF00F265B7 /* LayoutView.m */; };
 		CE8D432916AB0D5D00D55884 /* gridlee.zip in Resources */ = {isa = PBXBuildFile; fileRef = CE8D432816AB0D5D00D55884 /* gridlee.zip */; };
 		CE8D87D8164FE4BE00685BC4 /* config_iPhone_5.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE8D87D7164FE4BE00685BC4 /* config_iPhone_5.txt */; };
-		CE8D87DA16501C2200685BC4 /* libmamearmv7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8D87D916501C2200685BC4 /* libmamearmv7.a */; };
 		CE8D87DD1653121200685BC4 /* iCadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8D87DC1653121200685BC4 /* iCadeView.m */; };
-		CE8D87E0165708AC00685BC4 /* libmamesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBFBC30163D634700A05CD0 /* libmamesim.a */; };
 		CE8F08841741580100E2D5FB /* InputOptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F08831741580100E2D5FB /* InputOptionController.m */; };
 		CE8F08851741580100E2D5FB /* InputOptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F08831741580100E2D5FB /* InputOptionController.m */; };
 		CE8F088817435C3B00E2D5FB /* DefaultOptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F088717435C3A00E2D5FB /* DefaultOptionController.m */; };
 		CE8F088917435C3B00E2D5FB /* DefaultOptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F088717435C3A00E2D5FB /* DefaultOptionController.m */; };
 		CE8F1C601735199400D3F527 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F1C5F1735199400D3F527 /* CoreBluetooth.framework */; };
-		CE8F768D164D080D009AEDBC /* libmamearmv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F768C164D080D009AEDBC /* libmamearmv7s.a */; };
 		CE9454C8172BB23100B81C32 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9454C7172BB23100B81C32 /* GameKit.framework */; };
 		CE9454C9172BB26100B81C32 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9454C7172BB23100B81C32 /* GameKit.framework */; };
 		CE9454CC173160A300B81C32 /* NetplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9454CB173160A300B81C32 /* NetplayController.m */; };
@@ -80,9 +84,6 @@
 		CEAC6C6A16AAAB3400AF3275 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680C9163B13AB00051BC2 /* AudioToolbox.framework */; };
 		CEAC6C6B16AAAB3700AF3275 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680D1163BE5C400051BC2 /* CoreFoundation.framework */; };
 		CEAC6C6C16AAAB3A00AF3275 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680A61635BAA400051BC2 /* QuartzCore.framework */; };
-		CEAC6C6F16AAABB800AF3275 /* libmamearmv7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8D87D916501C2200685BC4 /* libmamearmv7.a */; };
-		CEAC6C7016AAABBB00AF3275 /* libmamearmv7s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8F768C164D080D009AEDBC /* libmamearmv7s.a */; };
-		CEAC6C7116AAABBE00AF3275 /* libmamesim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBFBC30163D634700A05CD0 /* libmamesim.a */; };
 		CEAC6C7516AAAC1D00AF3275 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAC6C7216AAAC1C00AF3275 /* Default-568h@2x.png */; };
 		CEAC6C7616AAAC1D00AF3275 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAC6C7316AAAC1C00AF3275 /* Default.png */; };
 		CEAC6C7716AAAC1D00AF3275 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAC6C7416AAAC1D00AF3275 /* Default@2x.png */; };
@@ -102,23 +103,21 @@
 		CEBFBC2D163C5DA100A05CD0 /* SKIN_1 in Resources */ = {isa = PBXBuildFile; fileRef = CEBFBC1D163C5DA100A05CD0 /* SKIN_1 */; };
 		CEBFBC2E163C5DA100A05CD0 /* SKIN_2 in Resources */ = {isa = PBXBuildFile; fileRef = CEBFBC1E163C5DA100A05CD0 /* SKIN_2 */; };
 		CEBFBC2F163C5DA100A05CD0 /* SKIN_3 in Resources */ = {isa = PBXBuildFile; fileRef = CEBFBC1F163C5DA100A05CD0 /* SKIN_3 */; };
-		CEC5AD9716AAB47800C7B33D /* MAME4iOS72.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB6982516AAB39F0005E140 /* MAME4iOS72.png */; };
-		CEC5AD9816AAB47B00C7B33D /* MAME4iOS114.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB6982616AAB39F0005E140 /* MAME4iOS114.png */; };
-		CEC5AD9916AAB47D00C7B33D /* MAME4iOS144.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB6982716AAB39F0005E140 /* MAME4iOS144.png */; };
-		CEC5AD9C16AAB79C00C7B33D /* MAME4iOS57.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB6982416AAB39F0005E140 /* MAME4iOS57.png */; };
 		CEE6808A1635BA7000051BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680891635BA7000051BC2 /* UIKit.framework */; };
 		CEE6808C1635BA7000051BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6808B1635BA7000051BC2 /* Foundation.framework */; };
 		CEE6808E1635BA7000051BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6808D1635BA7000051BC2 /* CoreGraphics.framework */; };
 		CEE680941635BA7000051BC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE680921635BA7000051BC2 /* InfoPlist.strings */; };
-		CEE6809C1635BA7000051BC2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE6809B1635BA7000051BC2 /* Default.png */; };
-		CEE6809E1635BA7000051BC2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE6809D1635BA7000051BC2 /* Default@2x.png */; };
-		CEE680A01635BA7000051BC2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE6809F1635BA7000051BC2 /* Default-568h@2x.png */; };
 		CEE680A71635BAA400051BC2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680A61635BAA400051BC2 /* QuartzCore.framework */; };
 		CEE680CA163B13AC00051BC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680C9163B13AB00051BC2 /* AudioToolbox.framework */; };
 		CEE680D2163BE5C400051BC2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE680D1163BE5C400051BC2 /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18117AA8240BF69A00B771F4 /* Launch-Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch-Screen.storyboard"; sourceTree = "<group>"; };
+		183BBA902409506300BDBEFB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MAME4iOS/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		183BBA922409507A00BDBEFB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		185072A0240A807D00582901 /* libmamearmv7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmamearmv7.a; path = ../../libmamearmv7.a; sourceTree = "<group>"; };
+		185072A2240A966700582901 /* libmamearm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmamearm64.a; path = ../../libmamearm64.a; sourceTree = "<group>"; };
 		CE30090016FA47BD000EDCF1 /* cheat.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = cheat.zip; path = "../../iOS-res/Applications/MAME4iOS.app/cheat.zip"; sourceTree = "<group>"; };
 		CE30090316FA47CB000EDCF1 /* Category.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Category.ini; path = "../../iOS-res/Applications/MAME4iOS.app/Category.ini"; sourceTree = "<group>"; };
 		CE30090616FA47E4000EDCF1 /* hiscore.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hiscore.dat; path = "../../iOS-res/Applications/MAME4iOS.app/hiscore.dat"; sourceTree = "<group>"; };
@@ -131,7 +130,6 @@
 		CE8A4192170F41FC001ADFA4 /* myosd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = myosd.h; path = "../../../src/osd/droid-ios/myosd.h"; sourceTree = "<group>"; };
 		CE8D432816AB0D5D00D55884 /* gridlee.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = gridlee.zip; path = "../../iOS-res/Applications/MAME4iOS.app/gridlee.zip"; sourceTree = "<group>"; };
 		CE8D87D7164FE4BE00685BC4 /* config_iPhone_5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config_iPhone_5.txt; path = "../../iOS-res/Applications/MAME4iOS.app/config_iPhone_5.txt"; sourceTree = "<group>"; };
-		CE8D87D916501C2200685BC4 /* libmamearmv7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmamearmv7.a; path = ../../libmamearmv7.a; sourceTree = "<group>"; };
 		CE8D87DB1653121100685BC4 /* iCadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iCadeView.h; path = ../../iOS/iCadeView.h; sourceTree = "<group>"; };
 		CE8D87DC1653121200685BC4 /* iCadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCadeView.m; path = ../../iOS/iCadeView.m; sourceTree = "<group>"; };
 		CE8D87DF16541AC400685BC4 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = ../../iOS/Globals.h; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 		CE8F0D7B16585C2A0048D63C /* DebugView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DebugView.h; path = ../../iOS/DebugView.h; sourceTree = "<group>"; };
 		CE8F0D7C16585C2B0048D63C /* DebugView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugView.m; path = ../../iOS/DebugView.m; sourceTree = "<group>"; };
 		CE8F1C5F1735199400D3F527 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		CE8F768C164D080D009AEDBC /* libmamearmv7s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmamearmv7s.a; path = ../../libmamearmv7s.a; sourceTree = "<group>"; };
 		CE90575A166A89D000653872 /* ListOptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListOptionController.h; path = ../../iOS/ListOptionController.h; sourceTree = "<group>"; };
 		CE90575B166A89D000653872 /* ListOptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListOptionController.m; path = ../../iOS/ListOptionController.m; sourceTree = "<group>"; };
 		CE9454C7172BB23100B81C32 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -165,10 +162,6 @@
 		CEAC6C7916AAACA600AF3275 /* Gridlee72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gridlee72.png; sourceTree = "<group>"; };
 		CEAC6C7A16AAACA600AF3275 /* Gridlee114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gridlee114.png; sourceTree = "<group>"; };
 		CEAC6C7B16AAACA600AF3275 /* Gridlee144-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gridlee144-2.png"; sourceTree = "<group>"; };
-		CEB6982416AAB39F0005E140 /* MAME4iOS57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAME4iOS57.png; sourceTree = "<group>"; };
-		CEB6982516AAB39F0005E140 /* MAME4iOS72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAME4iOS72.png; sourceTree = "<group>"; };
-		CEB6982616AAB39F0005E140 /* MAME4iOS114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAME4iOS114.png; sourceTree = "<group>"; };
-		CEB6982716AAB39F0005E140 /* MAME4iOS144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAME4iOS144.png; sourceTree = "<group>"; };
 		CEB8E0DB16A3311500A6FEDC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LICENSE; path = "../../iOS-res/Applications/MAME4iOS.app/LICENSE"; sourceTree = "<group>"; };
 		CEBE455B168862EE00D9C140 /* help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = help.html; path = "../../iOS-res/Applications/MAME4iOS.app/help.html"; sourceTree = "<group>"; };
 		CEBFBC10163C5DA100A05CD0 /* border-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "border-iPad.png"; path = "../../iOS-res/Applications/MAME4iOS.app/border-iPad.png"; sourceTree = "<group>"; };
@@ -181,7 +174,6 @@
 		CEBFBC1D163C5DA100A05CD0 /* SKIN_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SKIN_1; path = "../../iOS-res/Applications/MAME4iOS.app/SKIN_1"; sourceTree = "<group>"; };
 		CEBFBC1E163C5DA100A05CD0 /* SKIN_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SKIN_2; path = "../../iOS-res/Applications/MAME4iOS.app/SKIN_2"; sourceTree = "<group>"; };
 		CEBFBC1F163C5DA100A05CD0 /* SKIN_3 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SKIN_3; path = "../../iOS-res/Applications/MAME4iOS.app/SKIN_3"; sourceTree = "<group>"; };
-		CEBFBC30163D634700A05CD0 /* libmamesim.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmamesim.a; path = ../../libmamesim.a; sourceTree = "<group>"; };
 		CEE680851635BA7000051BC2 /* MAME4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MAME4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE680891635BA7000051BC2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEE6808B1635BA7000051BC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -189,9 +181,6 @@
 		CEE680911635BA7000051BC2 /* MAME4iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MAME4iOS-Info.plist"; sourceTree = "<group>"; };
 		CEE680931635BA7000051BC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEE680971635BA7000051BC2 /* MAME4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MAME4iOS-Prefix.pch"; sourceTree = "<group>"; };
-		CEE6809B1635BA7000051BC2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		CEE6809D1635BA7000051BC2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		CEE6809F1635BA7000051BC2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CEE680A61635BAA400051BC2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CEE680A81635BAF400051BC2 /* iph_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iph_main.m; path = ../../iOS/iph_main.m; sourceTree = "<group>"; };
 		CEE680AA1635BB2700051BC2 /* AnalogStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnalogStick.h; path = ../../iOS/AnalogStick.h; sourceTree = "<group>"; };
@@ -219,6 +208,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18117AAB240BF87000B771F4 /* CoreBluetooth.framework in Frameworks */,
+				18117AAA240BF6ED00B771F4 /* libmamearm64.a in Frameworks */,
 				CE9454C9172BB26100B81C32 /* GameKit.framework in Frameworks */,
 				CEAC6C2E16AAA80400AF3275 /* UIKit.framework in Frameworks */,
 				CEAC6C2F16AAA80400AF3275 /* Foundation.framework in Frameworks */,
@@ -228,9 +219,6 @@
 				CEAC6C6A16AAAB3400AF3275 /* AudioToolbox.framework in Frameworks */,
 				CEAC6C6B16AAAB3700AF3275 /* CoreFoundation.framework in Frameworks */,
 				CEAC6C6C16AAAB3A00AF3275 /* QuartzCore.framework in Frameworks */,
-				CEAC6C6F16AAABB800AF3275 /* libmamearmv7.a in Frameworks */,
-				CEAC6C7016AAABBB00AF3275 /* libmamearmv7s.a in Frameworks */,
-				CEAC6C7116AAABBE00AF3275 /* libmamesim.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,17 +227,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8F1C601735199400D3F527 /* CoreBluetooth.framework in Frameworks */,
-				CE8D87E0165708AC00685BC4 /* libmamesim.a in Frameworks */,
-				CE8D87DA16501C2200685BC4 /* libmamearmv7.a in Frameworks */,
-				CE8F768D164D080D009AEDBC /* libmamearmv7s.a in Frameworks */,
 				CEE680D2163BE5C400051BC2 /* CoreFoundation.framework in Frameworks */,
 				CEE680CA163B13AC00051BC2 /* AudioToolbox.framework in Frameworks */,
 				CEE680A71635BAA400051BC2 /* QuartzCore.framework in Frameworks */,
 				CEE6808A1635BA7000051BC2 /* UIKit.framework in Frameworks */,
+				185072A1240A807D00582901 /* libmamearmv7.a in Frameworks */,
 				CEE6808C1635BA7000051BC2 /* Foundation.framework in Frameworks */,
 				CEE6808E1635BA7000051BC2 /* CoreGraphics.framework in Frameworks */,
 				CE9454C8172BB23100B81C32 /* GameKit.framework in Frameworks */,
 				CEAC6C6716AAAB2D00AF3275 /* libz.dylib in Frameworks */,
+				185072A3240A966700582901 /* libmamearm64.a in Frameworks */,
 				CEAC6C6816AAAB3000AF3275 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +293,7 @@
 			children = (
 				CE87C2FD16F5C20F00ABE4F6 /* Gridlee.entitlements */,
 				CEAC6C3216AAA80400AF3275 /* Supporting Files */,
+				18117AA8240BF69A00B771F4 /* Launch-Screen.storyboard */,
 			);
 			path = Gridlee;
 			sourceTree = "<group>";
@@ -354,9 +342,9 @@
 		CEE6807A1635BA6F00051BC2 = {
 			isa = PBXGroup;
 			children = (
-				CE8D87D916501C2200685BC4 /* libmamearmv7.a */,
-				CE8F768C164D080D009AEDBC /* libmamearmv7s.a */,
-				CEBFBC30163D634700A05CD0 /* libmamesim.a */,
+				183BBA902409506300BDBEFB /* LaunchScreen.storyboard */,
+				185072A2240A966700582901 /* libmamearm64.a */,
+				185072A0240A807D00582901 /* libmamearmv7.a */,
 				CEAC6C2716AAA73900AF3275 /* RELOADED */,
 				CEE6808F1635BA7000051BC2 /* MAME4iOS */,
 				CEAC6C3116AAA80400AF3275 /* Gridlee */,
@@ -396,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				CE87C2FE16F5C21A00ABE4F6 /* MAME4iOS.entitlements */,
+				183BBA922409507A00BDBEFB /* Images.xcassets */,
 				CEE680901635BA7000051BC2 /* Supporting Files */,
 			);
 			path = MAME4iOS;
@@ -404,16 +393,9 @@
 		CEE680901635BA7000051BC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CEB6982416AAB39F0005E140 /* MAME4iOS57.png */,
-				CEB6982516AAB39F0005E140 /* MAME4iOS72.png */,
-				CEB6982616AAB39F0005E140 /* MAME4iOS114.png */,
-				CEB6982716AAB39F0005E140 /* MAME4iOS144.png */,
 				CEE680911635BA7000051BC2 /* MAME4iOS-Info.plist */,
 				CEE680921635BA7000051BC2 /* InfoPlist.strings */,
 				CEE680971635BA7000051BC2 /* MAME4iOS-Prefix.pch */,
-				CEE6809B1635BA7000051BC2 /* Default.png */,
-				CEE6809D1635BA7000051BC2 /* Default@2x.png */,
-				CEE6809F1635BA7000051BC2 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -474,12 +456,21 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Seleuco;
+				TargetAttributes = {
+					CEAC6C2B16AAA80400AF3275 = {
+						ProvisioningStyle = Automatic;
+					};
+					CEE680841635BA7000051BC2 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = CEE6807F1635BA6F00051BC2 /* Build configuration list for PBXProject "MAME4iOS" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = CEE6807A1635BA6F00051BC2;
@@ -520,6 +511,7 @@
 				CEAC6C7F16AAACA700AF3275 /* Gridlee144-2.png in Resources */,
 				CE8D432916AB0D5D00D55884 /* gridlee.zip in Resources */,
 				CE30090216FA47BD000EDCF1 /* cheat.zip in Resources */,
+				18117AA9240BF69A00B771F4 /* Launch-Screen.storyboard in Resources */,
 				CE30090516FA47CB000EDCF1 /* Category.ini in Resources */,
 				CE30090816FA47E4000EDCF1 /* hiscore.dat in Resources */,
 			);
@@ -530,13 +522,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE680941635BA7000051BC2 /* InfoPlist.strings in Resources */,
-				CEE6809C1635BA7000051BC2 /* Default.png in Resources */,
-				CEE6809E1635BA7000051BC2 /* Default@2x.png in Resources */,
-				CEE680A01635BA7000051BC2 /* Default-568h@2x.png in Resources */,
+				183BBA932409507A00BDBEFB /* Images.xcassets in Resources */,
 				CEBFBC20163C5DA100A05CD0 /* border-iPad.png in Resources */,
 				CEBFBC21163C5DA100A05CD0 /* config_iPad.txt in Resources */,
 				CEBFBC22163C5DA100A05CD0 /* config_iPhone.txt in Resources */,
 				CEBFBC23163C5DA100A05CD0 /* crt-1.png in Resources */,
+				183BBA912409506300BDBEFB /* LaunchScreen.storyboard in Resources */,
 				CEBFBC24163C5DA100A05CD0 /* crt-2.png in Resources */,
 				CEBFBC2B163C5DA100A05CD0 /* scanline-1.png in Resources */,
 				CEBFBC2C163C5DA100A05CD0 /* scanline-2.png in Resources */,
@@ -546,10 +537,6 @@
 				CE8D87D8164FE4BE00685BC4 /* config_iPhone_5.txt in Resources */,
 				CEBE455C168862EE00D9C140 /* help.html in Resources */,
 				CEB8E0DC16A3311600A6FEDC /* LICENSE in Resources */,
-				CEC5AD9716AAB47800C7B33D /* MAME4iOS72.png in Resources */,
-				CEC5AD9816AAB47B00C7B33D /* MAME4iOS114.png in Resources */,
-				CEC5AD9916AAB47D00C7B33D /* MAME4iOS144.png in Resources */,
-				CEC5AD9C16AAB79C00C7B33D /* MAME4iOS57.png in Resources */,
 				CE30090116FA47BD000EDCF1 /* cheat.zip in Resources */,
 				CE30090416FA47CB000EDCF1 /* Category.ini in Resources */,
 				CE30090716FA47E4000EDCF1 /* hiscore.dat in Resources */,
@@ -634,17 +621,23 @@
 		CEAC6C3E16AAA80500AF3275 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gridlee/Gridlee-Prefix.pch";
 				INFOPLIST_FILE = "Gridlee/Gridlee-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../..\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				VALID_ARCHS = "arm64 armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -652,17 +645,22 @@
 		CEAC6C3F16AAA80500AF3275 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Gridlee/Gridlee-Prefix.pch";
 				INFOPLIST_FILE = "Gridlee/Gridlee-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../..\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -723,6 +721,13 @@
 		CEE680A41635BA7000051BC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MAME4iOS/MAME4iOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -730,16 +735,19 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "MAME4iOS/MAME4iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				INFOPLIST_FILE = "/Users/apple/development/MAME4Mobile/xcode/MAME4iOS/MAME4iOS/MAME4iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../..\"",
+					"$(PROJECT_DIR)",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mame.MAME4iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -747,19 +755,28 @@
 		CEE680A51635BA7000051BC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MAME4iOS/MAME4iOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "MAME4iOS/MAME4iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				INFOPLIST_FILE = "/Users/apple/development/MAME4Mobile/xcode/MAME4iOS/MAME4iOS/MAME4iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../..\"",
+					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mame.MAME4iOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
