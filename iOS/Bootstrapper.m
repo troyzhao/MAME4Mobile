@@ -49,6 +49,7 @@
 #import "BTJoyHelper.h"
 
 #include <sys/stat.h>
+#include <sys/utsname.h>
 
 #define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #define IS_IPAD   ( [ [ [ UIDevice currentDevice ] model ] isEqualToString: @"iPad" ] )
@@ -187,11 +188,19 @@ const char* get_documents_path(const char* file)
 
     [manager release];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation : UIStatusBarAnimationNone];
-    
     g_isIpad = IS_IPAD;
-    g_isIphone5 = IS_WIDESCREEN; //Really want to know if widescreen
-    //g_isIphone5 = true; g_isIpad = false;//TEST
+    
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    printf("machine: %s \nnodename: %s\n", systemInfo.machine, systemInfo.nodename);
+    NSComparisonResult result = [[NSString stringWithUTF8String:systemInfo.machine] compare:@"iPhone5" options:NSLiteralSearch range:NSMakeRange(0, 7)];
+    if (result == NSOrderedDescending) {
+        // newer then iphone5
+        printf("iphone5 or later\n");
+        g_isIphone5 = 1;
+    }
+    // g_isIphone5 = IS_WIDESCREEN; //Really want to know if widescreen
+    // g_isIphone5 = true; g_isIpad = false;//TEST
     
 	hrViewController = [[EmulatorController alloc] init];
 	
