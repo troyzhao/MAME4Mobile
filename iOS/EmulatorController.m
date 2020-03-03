@@ -59,6 +59,7 @@
 #endif
 #import <pthread.h>
 #import "NetplayGameKit.h"
+#import "Globals.h"
 
 int g_isIpad = 0;
 int g_isIphone5 = 0;
@@ -751,6 +752,11 @@ void* app_Thread_Start(void* args)
      self.view.backgroundColor = [UIColor blackColor];	
     externalView = nil;
     printf("loadView\n");
+    
+    myosd_res_width = myosd_video_width = rect.size.width;
+    myosd_res_height = myosd_video_height = rect.size.width * 240 / 320;
+    
+    
 }
 
 -(void)viewDidLoad{	
@@ -881,6 +887,10 @@ void* app_Thread_Start(void* args)
 
 - (void)drawRect:(CGRect)rect
 {
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -1219,7 +1229,7 @@ void* app_Thread_Start(void* args)
    }		  
    else
    {
-        r = rFrames[PORTRAIT_VIEW_FULL];
+        r = [self adjustFrame:rFrames[PORTRAIT_VIEW_FULL] isPortrait:YES];
    }
    
     if(g_pref_keep_aspect_ratio_port)
@@ -1413,12 +1423,12 @@ void* app_Thread_Start(void* args)
    }     
    else
    {
-        r = rFrames[LANDSCAPE_VIEW_FULL];
+        r = [self adjustFrame:rFrames[LANDSCAPE_VIEW_FULL] isPortrait:NO];
    }     
    
    if(g_pref_keep_aspect_ratio_land)
    {
-       //printf("%d %d\n",myosd_video_width,myosd_video_height);
+       printf("video width %d %d\n",myosd_video_width,myosd_video_height);
 
        int tmp_width = r.size.width;// > emulated_width ?
        int tmp_height = ((((tmp_width * myosd_vis_video_height) / myosd_vis_video_width)+7)&~7);
@@ -1863,6 +1873,12 @@ void* app_Thread_Start(void* args)
 	[self touchesBegan:touches withEvent:event];
 }
 
+
+/**
+ Get controller coords
+
+ @param orientation 0:portrait; 1:landscape
+ */
 - (void)getControllerCoords:(int)orientation {
     char string[256];
     FILE *fp;
@@ -1934,45 +1950,45 @@ void* app_Thread_Start(void* args)
 						
 			switch(i)
 			{
-    		case 0:    rInput[DPAD_DOWN_LEFT_RECT]   	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 1:    rInput[DPAD_DOWN_RECT]   	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 2:    rInput[DPAD_DOWN_RIGHT_RECT]    = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 3:    rInput[DPAD_LEFT_RECT]  	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 4:    rInput[DPAD_RIGHT_RECT]  	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 5:    rInput[DPAD_UP_LEFT_RECT]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 6:    rInput[DPAD_UP_RECT]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 7:    rInput[DPAD_UP_RIGHT_RECT]  	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 8:    rInput[BTN_SELECT_RECT] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 9:    rInput[BTN_START_RECT]  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 10:   rInput[BTN_L1_RECT]   = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 11:   rInput[BTN_R1_RECT]   = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 12:   rInput[BTN_MENU_RECT]   = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 13:   rInput[BTN_X_A_RECT]   	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 14:   rInput[BTN_X_RECT]   	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 15:   rInput[BTN_B_X_RECT]    	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 16:   rInput[BTN_A_RECT]  		= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 17:   rInput[BTN_B_RECT]  	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 18:   rInput[BTN_A_Y_RECT]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 19:   rInput[BTN_Y_RECT]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 20:   rInput[BTN_B_Y_RECT]  	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 21:   rInput[BTN_L2_RECT]   = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-    		case 22:   rInput[BTN_R2_RECT]   = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
+    		case 0:    rInput[DPAD_DOWN_LEFT_RECT] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation] ; break;
+    		case 1:    rInput[DPAD_DOWN_RECT]   	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 2:    rInput[DPAD_DOWN_RIGHT_RECT] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 3:    rInput[DPAD_LEFT_RECT]  	    = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 4:    rInput[DPAD_RIGHT_RECT]  	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 5:    rInput[DPAD_UP_LEFT_RECT]    = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 6:    rInput[DPAD_UP_RECT]     	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 7:    rInput[DPAD_UP_RIGHT_RECT]  	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 8:    rInput[BTN_SELECT_RECT] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 9:    rInput[BTN_START_RECT]  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 10:   rInput[BTN_L1_RECT]   = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 11:   rInput[BTN_R1_RECT]   = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 12:   rInput[BTN_MENU_RECT]   = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 13:   rInput[BTN_X_A_RECT]   	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 14:   rInput[BTN_X_RECT]   	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 15:   rInput[BTN_B_X_RECT]    	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 16:   rInput[BTN_A_RECT]  		= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 17:   rInput[BTN_B_RECT]  	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 18:   rInput[BTN_A_Y_RECT]     	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 19:   rInput[BTN_Y_RECT]     	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 20:   rInput[BTN_B_Y_RECT]  	= [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 21:   rInput[BTN_L2_RECT]   = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+    		case 22:   rInput[BTN_R2_RECT]   = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
     		case 23:    break;
     		
-    		case 24:   rButtonImages[BTN_B] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 25:   rButtonImages[BTN_X]  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 26:   rButtonImages[BTN_A]  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 27:   rButtonImages[BTN_Y]  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 28:   rDPadImage  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 29:   rButtonImages[BTN_SELECT]  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 30:   rButtonImages[BTN_START]  = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 31:   rButtonImages[BTN_L1] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 32:   rButtonImages[BTN_R1] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 33:   rButtonImages[BTN_L2] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 34:   rButtonImages[BTN_R2] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
+    		case 24:   rButtonImages[BTN_B] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 25:   rButtonImages[BTN_X]  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 26:   rButtonImages[BTN_A]  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 27:   rButtonImages[BTN_Y]  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 28:   rDPadImage  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 29:   rButtonImages[BTN_SELECT]  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 30:   rButtonImages[BTN_START]  = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 31:   rButtonImages[BTN_L1] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 32:   rButtonImages[BTN_R1] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 33:   rButtonImages[BTN_L2] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
+            case 34:   rButtonImages[BTN_R2] = [self adjustPosition:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:!orientation]; break;
             
-            case 35:   rStickWindow = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-            case 36:   rStickArea = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); rStickWindow = rStickArea;break;
+            case 35:   rStickWindow = [self adjustPosition:CGRectMake(coords[0], coords[1], coords[2], coords[3]) isPortrait:!orientation]; break;
+            case 36:   rStickArea = [self adjustPosition:CGRectMake(coords[0], coords[1], coords[2], coords[3]) isPortrait:!orientation]; rStickWindow = rStickArea;break;
             case 37:   stick_radio =coords[0]; break;            
             case 38:   g_controller_opacity= coords[0]; break;
 			}
@@ -2017,6 +2033,41 @@ void* app_Thread_Start(void* args)
   }
 }
 
+- (CGRect)adjustPosition:(CGRect)configFrame isPortrait:(BOOL)isPortrait {
+    CGRect fullRect = rFrames[PORTRAIT_VIEW_FULL];
+    if (!isPortrait) {
+        fullRect = rFrames[LANDSCAPE_VIEW_FULL];
+    }
+    
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    CGRect adjustedFrame = CGRectMake(((int)configFrame.origin.x == 0)?0:configFrame.origin.x * screenFrame.size.width / fullRect.size.width,
+                                      ((int)configFrame.origin.y == 0)?0:configFrame.origin.y * screenFrame.size.height / fullRect.size.height,
+                                      configFrame.size.width,
+                                      configFrame.size.height);
+    return adjustedFrame;
+}
+
+- (CGRect)adjustFrame:(CGRect)configFrame isPortrait:(BOOL)isPortrait {
+    CGRect fullRect = rFrames[PORTRAIT_VIEW_FULL];
+    if (!isPortrait) {
+        fullRect = rFrames[LANDSCAPE_VIEW_FULL];
+    }
+    
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+//    float width = screenFrame.size.width;
+//    float height = screenFrame.size.height;
+//    if (width > height) {
+//        float tmp = width;
+//        width = height;
+//        height = tmp;
+//    }
+    CGRect adjustedFrame = CGRectMake(((int)configFrame.origin.x == 0)?0:configFrame.origin.x * screenFrame.size.width / fullRect.size.width,
+                                    ((int)configFrame.origin.y == 0)?0:configFrame.origin.y * screenFrame.size.height / fullRect.size.height,
+                                    configFrame.size.width * screenFrame.size.width / fullRect.size.width,
+                                    configFrame.size.height * screenFrame.size.height / fullRect.size.height);
+    return adjustedFrame;
+}
+
 - (void)getConf{
     char string[256];
     FILE *fp;
@@ -2046,15 +2097,17 @@ void* app_Thread_Start(void* args)
 						
 			switch(i)
 			{
-	    		case 0:    rFrames[PORTRAIT_VIEW_FULL]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-	    		case 1:    rFrames[PORTRAIT_VIEW_NOT_FULL] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-	    		case 2:    rFrames[PORTRAIT_IMAGE_BACK]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-	    		case 3:    rFrames[PORTRAIT_IMAGE_OVERLAY]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
+	    		case 0:
+                    rFrames[PORTRAIT_VIEW_FULL]      = CGRectMake( coords[0], coords[1], coords[2], coords[3] );
+                    break;
+	    		case 1:    rFrames[PORTRAIT_VIEW_NOT_FULL]  = [self adjustFrame:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:YES]; break;
+	    		case 2:    rFrames[PORTRAIT_IMAGE_BACK]     = [self adjustFrame:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:YES]; break;
+	    		case 3:    rFrames[PORTRAIT_IMAGE_OVERLAY]  = [self adjustFrame:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:YES]; break;
 	    		
-                case 4:    rFrames[LANDSCAPE_VIEW_FULL] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-	    		case 5:    rFrames[LANDSCAPE_VIEW_NOT_FULL] = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-	    		case 6:    rFrames[LANDSCAPE_IMAGE_BACK]  	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
-	    		case 7:    rFrames[LANDSCAPE_IMAGE_OVERLAY]     	= CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
+                case 4:    rFrames[LANDSCAPE_VIEW_FULL]     = CGRectMake( coords[0], coords[1], coords[2], coords[3] ); break;
+	    		case 5:    rFrames[LANDSCAPE_VIEW_NOT_FULL] = [self adjustFrame:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:NO]; break;
+	    		case 6:    rFrames[LANDSCAPE_IMAGE_BACK]  	= [self adjustFrame:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:NO]; break;
+	    		case 7:    rFrames[LANDSCAPE_IMAGE_OVERLAY] = [self adjustFrame:CGRectMake( coords[0], coords[1], coords[2], coords[3] ) isPortrait:NO]; break;
                     
 	            case 8:    g_enable_debug_view = coords[0]; break;
 	            //case 9:    main_thread_priority_type = coords[0]; break;
@@ -2188,7 +2241,7 @@ void* app_Thread_Start(void* args)
         NSString *file = [filelist objectAtIndex: i];
         if([file isEqualToString:@"cheat.zip"])
             continue;
-        if(![file hasSuffix:@".zip"])
+        if(![file hasSuffix:@".zip"])   // so,it only accepts .zip rom.
             continue;
         [romlist addObject: file];
     }
