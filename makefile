@@ -20,7 +20,7 @@ NOWERROR = 1
 
 ############ ANDROID
 
-ANDROID = 1
+# ANDROID = 1
 
 #AMIPS=1
 
@@ -34,15 +34,15 @@ AARMV8=1
 
 ########## iOS
 
-#iOS = 1
+iOS = 1
 
-#iOSOSX = 1
+iOSOSX = 1
 
-#iOSNOJAILBREAK = 1
+iOSNOJAILBREAK = 1
 
-#iOSSIMULATOR = 1
-
-#iOSARMV7=1
+# iOSSIMULATOR = 1
+# iOSARMV7=1
+iOSARM64=1
 
 #iOSARMV7S=1
 
@@ -51,13 +51,14 @@ AARMV8=1
 CROSS_BUILD = 1
 
 #TARGETOS = android
-#PTR64 = 0
+# if you set arch arm64 then you should set PTR64=1
+# PTR64 = 1
 
 X86_MIPS3_DRC =
 X86_PPC_DRC =
 FORCE_DRC_C_BACKEND = 1
 
-#OPTIMIZE = 1
+OPTIMIZE = 0
 
 ifdef ANDROID
 
@@ -113,17 +114,21 @@ else
 ##OSX
 
 ifndef iOSSIMULATOR
-MYPREFIX=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin10-
+ifdef iOSARM64
+	PTR64 = 1
+endif
+# MYPREFIX=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin10-
 #MYPREFIX=/Developer/Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/bin/arm-apple-darwin10-llvm-
 #MYPREFIX=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/llvm-gcc-4.2/bin/arm-apple-darwin10-llvm-
-#MYPREFIX=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/
+# MYPREFIX=/Applications/Xcode.app/Contents/Developer/usr/bin/
+MYPREFIX=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/
 
 #BASE_DEV=/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk
-BASE_DEV=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk
+BASE_DEV=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
 else
 
-MYPREFIX=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/
-BASE_DEV=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk
+MYPREFIX=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/
+BASE_DEV=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk
 
 endif
 
@@ -402,11 +407,13 @@ ifdef iOSOSX
 AR = @$(MYPREFIX)ar
 #CC = @$(MYPREFIX)gcc-4.2
 #LD = @$(MYPREFIX)g++-4.2
-CC = @$(MYPREFIX)gcc
-LD = @$(MYPREFIX)g++
+CC = @$(MYPREFIX)clang
+LD = @$(MYPREFIX)clang
+# CC = @/Applications/Xcode.app/Contents/Developer/usr/bin/gcc
+# LD = @$(CC)
 
 
-else
+else # iOS on *nix
 
 AR = @$(MYPREFIX)ar
 ifdef AARMV7
@@ -482,6 +489,9 @@ EMULATOR = libmamearmv7.a
 endif
 ifdef iOSARMV7S
 EMULATOR = libmamearmv7s.a
+endif
+ifdef iOSARM64
+	EMULATOR = libmamearm64.a
 endif
 else
 EMULATOR = $(FULLNAME)$(EXE)
@@ -859,8 +869,8 @@ LDFLAGS += -lc -lm
 endif #ANDROID
 
 ifdef iOS
-#CFLAGS += -isysroot $(BASE_DEV)
-#CCOMFLAGS += --sysroot $(BASE_DEV)
+CCOMFLAGS += -isysroot $(BASE_DEV)
+# CCOMFLAGS += --sysroot $(BASE_DEV)
 CCOMFLAGS += -DIOS
 
 ###
@@ -877,7 +887,7 @@ ifndef iOSOSX
 CCOMFLAGS += -DIOS3
 CCOMFLAGS += -F/home/david/Projects/iphone/toolchain/sdks/iPhoneOS3.1.2.sdk/System/Library/PrivateFrameworks
 
-else #OSX
+else #iOS on OSX
 
 #CFLAGS += -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk 
 
@@ -885,21 +895,29 @@ CCOMFLAGS += -F$(BASE_DEV)/System/Library/PrivateFrameworks
 CCOMFLAGS += -F$(BASE_DEV)/System/Library/Frameworks
 CCOMFLAGS +=  -I$(BASE_DEV)/usr/include
 #CCOMFLAGS +=  -I$(BASE_DEV)/include/c++/4.2.1/armv7-apple-darwin10/
+CCOMFLAGS += -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1
 
 #CCOMFLAGS += -march=armv7-a -mfloat-abi=softfp -DARMV7
 #CCOMFLAGS += -march=armv7s -DARMV7
 
-ifndef iOSSIMULATOR
+ifndef iOSSIMULATOR 
+# OS 
 
-ifndef iOSARMV7S
-CCOMFLAGS += -arch armv7 
-LDFLAGS += -arch armv7
-else
-CCOMFLAGS += -arch armv7s 
-LDFLAGS += -arch armv7s
+ifdef iOSARMV7S
+	CCOMFLAGS += -arch armv7s 
+	LDFLAGS += -arch armv7s
+endif
+ifdef iOSARMV7
+	CCOMFLAGS += -arch armv7 
+	LDFLAGS += -arch armv7
+endif
+ifdef iOSARM64
+	CCOMFLAGS += -arch arm64
+	LDFLAGS += -arch arm64
 endif
 
-CCOMFLAGS += -miphoneos-version-min=5.0
+
+CCOMFLAGS += -miphoneos-version-min=9.0
 
 #LDFLAGS  += -march=armv7s
 #LDFLAGS  += -march=armv7-a
@@ -907,11 +925,11 @@ CCOMFLAGS += -miphoneos-version-min=5.0
 #LDFLAGS +=   -ios_version_min 5.0
 #CCOMFLAGS += -x objective-c 
 
-else  #iOSSIMULATOR
+else  #ifdef iOSSIMULATOR
 
 CCOMFLAGS += -arch i386 
 #CCOMFLAGS +=  -mios-simulator-version-min=6.0 
-CCOMFLAGS += -D__IPHONE_OS_VERSION_MIN_REQUIRED=50000 
+CCOMFLAGS += -D__IPHONE_OS_VERSION_MIN_REQUIRED=90000 
 #CCOMFLAGS += -x objective-c  -fmessage-length=0 -Wno-trigraphs -fasm-blocks -O0 -Wreturn-type -Wunused-variable -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -fpascal-strings -gdwarf-2 -fobjc-legacy-dispatch -fobjc-abi-version=2
 
 LDFLAGS += -arch i386
@@ -932,6 +950,8 @@ ifndef iOSNOJAILBREAK
 LDFLAGS += -weak_library ./lib/libBTstack.dylib
 endif
 CCOMFLAGS  += -ffast-math -fsingle-precision-constant
+CCOMFLAGS += -Wno-sign-conversion -Wdeprecated-declarations  -Winline-new-delete 
+CCOMFLAGS += -stdlib=libc++
 
 
 #LDFLAGS +=  -static
