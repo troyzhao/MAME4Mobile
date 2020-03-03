@@ -71,6 +71,7 @@ void iphone_UpdateScreen()
         bitmapContext = nil;
         
         
+        printf("osd_video_w: %d\nosd_video_h: %d\n", myosd_video_width, myosd_video_height);
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         bitmapContext = CGBitmapContextCreate(
                                               img_buffer,

@@ -288,6 +288,8 @@ void osd_init(running_machine *machine)
 {
 #ifdef ANDROID
 	__android_log_print(ANDROID_LOG_INFO, "mame4", "osd_init");
+#else
+    printf("osd_init\n");
 #endif
 	//add_exit_callback(machine, osd_exit);
 	machine->add_notifier(MACHINE_NOTIFY_EXIT, osd_exit);
@@ -298,6 +300,7 @@ void osd_init(running_machine *machine)
 
 	myosd_inGame = !(machine->gamedrv == &GAME_NAME(empty));
     
+    printf("in game: %d\n", myosd_inGame);
 	options_set_bool(mame_options(), OPTION_CHEAT,myosd_cheat,OPTION_PRIORITY_CMDLINE);
         options_set_bool(mame_options(), OPTION_AUTOSAVE,myosd_autosave,OPTION_PRIORITY_CMDLINE);
         options_set_bool(mame_options(), OPTION_SOUND,myosd_sound_value != -1,OPTION_PRIORITY_CMDLINE);
