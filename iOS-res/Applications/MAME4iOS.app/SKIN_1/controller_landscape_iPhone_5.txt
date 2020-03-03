@@ -33,7 +33,7 @@
 470,85,78,78//R1 img
 20,-3,78,39//L2 img
 470,-3,78,39//R2 img
-0,199,120,121//StickWindow
-4,194,115,115//StickArea
+0,205,120,121//StickWindow
+15,205,115,115//StickArea
 65//radio_stick
 45
