@@ -5,7 +5,7 @@ Edit makefile and overwrite NDK path, then run make.
 
 More information visit my cnblog: https://www.cnblogs.com/ciml/
 
-
+Available roms: https://wowroms.com/en/roms/list/mame+0.139u1
 
 # License
 
