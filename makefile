@@ -20,7 +20,7 @@ NOWERROR = 1
 
 ############ ANDROID
 
-# ANDROID = 1
+ANDROID = 1
 
 #AMIPS=1
 
@@ -28,21 +28,21 @@ NOWERROR = 1
 
 #AARMV6=1
 
-#AARMV7=1
+AARMV7=1
 
-AARMV8=1
+# AARMV8=1
 
 ########## iOS
 
-iOS = 1
+# iOS = 1
 
-iOSOSX = 1
+# iOSOSX = 1
 
-iOSNOJAILBREAK = 1
+# iOSNOJAILBREAK = 1
 
 # iOSSIMULATOR = 1
 # iOSARMV7=1
-iOSARM64=1
+# iOSARM64=1
 
 #iOSARMV7S=1
 
@@ -58,46 +58,49 @@ X86_MIPS3_DRC =
 X86_PPC_DRC =
 FORCE_DRC_C_BACKEND = 1
 
-OPTIMIZE = 0
+#OPTIMIZE = 0
 
 ifdef ANDROID
 
-	NDK_BUNDLE=/Users/apple/developer/AndroidSDK/ndk/17.2.4988734
+	NDK_BUNDLE=/Users/apple/Downloads/android-ndk-r17c
 
-ifdef AMIPS
-MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8-mips/bin/mipsel-linux-android-
-BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8-mips/sysroot
-endif
+	#/Users/apple/Downloads/android-ndk-r17c
+	#/Users/apple/developer/AndroidSDK/ndk/17.2.4988734
 
-ifdef AX86
-MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8-x86/bin/i686-android-linux-
-BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8-x86/sysroot
-endif
+	ifdef AMIPS
+	MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8-mips/bin/mipsel-linux-android-
+	BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8-mips/sysroot
+	endif
 
-ifdef AARMV6
-MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8/bin/arm-linux-androideabi-
-BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8/sysroot
-endif
+	ifdef AX86
+	MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8-x86/bin/i686-android-linux-
+	BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8-x86/sysroot
+	endif
 
-ifdef AARMV7
-# 	NDK_BUNDLE=/Users/apple/developer/AndroidSDK/android-ndk-r10e
-	
-MYPREFIX=$(NDK_BUNDLE)/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
-# MYPREFIX=
-# BASE_DEV=/Users/apple/developer/AndroidSDK/ndk-bundle/sysroot
-BASE_DEV=$(NDK_BUNDLE)/platforms/android-21/arch-arm
-SYSROOT=$(NDK_BUNDLE)/sysroot
-#SYSROOT=$(BASE_DEV)
-CXX_INCLUDE_BASE=$(NDK_BUNDLE)/sources/cxx-stl/gnu-libstdc++/4.9
-endif
+	ifdef AARMV6
+	MYPREFIX=/home/david/Projects/android/my-android-toolchain-r8/bin/arm-linux-androideabi-
+	BASE_DEV=/home/david/Projects/android/my-android-toolchain-r8/sysroot
+	endif
 
-ifdef AARMV8
-PTR64 = 1
-MYPREFIX=$(NDK_BUNDLE)/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64/bin/aarch64-linux-android-
-BASE_DEV=$(NDK_BUNDLE)/platforms/android-21/arch-arm64
-SYSROOT=$(NDK_BUNDLE)/sysroot
-CXX_INCLUDE_BASE=$(NDK_BUNDLE)/sources/cxx-stl/gnu-libstdc++/4.9
-endif
+	ifdef AARMV7
+	# 	NDK_BUNDLE=/Users/apple/developer/AndroidSDK/android-ndk-r10e
+		
+		MYPREFIX=$(NDK_BUNDLE)/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-
+		# MYPREFIX=
+		# BASE_DEV=/Users/apple/developer/AndroidSDK/ndk-bundle/sysroot
+		BASE_DEV=$(NDK_BUNDLE)/platforms/android-21/arch-arm
+		SYSROOT=$(NDK_BUNDLE)/sysroot
+		#SYSROOT=$(BASE_DEV)
+		CXX_INCLUDE_BASE=$(NDK_BUNDLE)/sources/cxx-stl/gnu-libstdc++/4.9
+	endif
+
+	ifdef AARMV8
+		PTR64 = 1
+		MYPREFIX=$(NDK_BUNDLE)/toolchains/aarch64-linux-android-4.9/prebuilt/darwin-x86_64/bin/aarch64-linux-android-
+		BASE_DEV=$(NDK_BUNDLE)/platforms/android-21/arch-arm64
+		SYSROOT=$(NDK_BUNDLE)/sysroot
+		CXX_INCLUDE_BASE=$(NDK_BUNDLE)/sources/cxx-stl/gnu-libstdc++/4.9
+	endif
 
 #MYPREFIX=/home/david/Projects/android/my-android-toolchain-14-crystax/bin/arm-linux-androideabi-
 #BASE_DEV=/home/david/Projects/android/my-android-toolchain-14-crystax/sysroot
@@ -422,6 +425,7 @@ CC = @$(MYPREFIX)gcc-4.6
 else
 CC = @$(MYPREFIX)gcc
 endif
+
 LD = @$(MYPREFIX)g++
 CC = @$(MYPREFIX)g++
 #AR = @$(MYPREFIX)clang
@@ -602,14 +606,17 @@ CCOMFLAGS += -O$(OPTIMIZE)
 # and make all errors into warnings
 ifneq ($(OPTIMIZE),0)
 ifneq ($(TARGETOS),os2)
+
 ifndef NOWERROR
 CCOMFLAGS += -Werror -fno-strict-aliasing $(ARCHOPTS)
 else
 CCOMFLAGS += -fno-strict-aliasing $(ARCHOPTS)
 endif
+
 else
 CCOMFLAGS += -fno-strict-aliasing $(ARCHOPTS)
 endif
+
 endif
 
 # add a basic set of warnings
@@ -766,7 +773,9 @@ SOFTFLOAT = $(OBJ)/libsoftfloat.a
 HQX = $(OBJ)/libhqx.a
 
 ifdef ANDROID
-	
+
+LIBS += -lgnustl_shared
+
 CCOMFLAGS += --sysroot $(SYSROOT)
 CCOMFLAGS += -I$(SYSROOT)/usr/include
 CCOMFLAGS += -I$(CXX_INCLUDE_BASE)/include
@@ -774,6 +783,7 @@ CCOMFLAGS += -I$(CXX_INCLUDE_BASE)/include
 CCOMFLAGS += -DANDROID
 CCOMFLAGS += -fpic
 
+LDFLAGS += -Wl,-rpath=$(BASE_LIB)/usr/lib
 # LDFLAGS +=  -lstdc++
 LDFLAGS +=  -lgnustl_shared
 LDFLAGS +=  -L$(BASE_DEV)/usr/lib
